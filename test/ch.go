@@ -6,7 +6,7 @@ import (
 )
 
 var chinfo = make(chan int, 10)
-var close chan int
+var close = make(chan int)
 
 func Channel() {
 	PublicCh()
