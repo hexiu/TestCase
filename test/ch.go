@@ -32,10 +32,9 @@ func ConsumeCh() {
 			select {
 			case j := <-chinfo:
 				fmt.Println(j)
-			case <-close:
-				fmt.Println("close")
+			case k := <-close:
+				fmt.Println("close", k)
 				time.Sleep(100 * time.Millisecond)
-				break
 			}
 		}
 	}()
