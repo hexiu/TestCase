@@ -17,9 +17,10 @@ func Channel() {
 func PublicCh() {
 	go func() {
 		for i := 0; i < 100; i++ {
-			chinfo <- i
 			if i == 89 {
 				close <- 1
+			} else {
+				chinfo <- i
 			}
 		}
 	}()
