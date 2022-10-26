@@ -18,7 +18,7 @@ func PublicCh() {
 	go func() {
 		for i := 0; i < 100; i++ {
 			chinfo <- i
-			if i == 99 {
+			if i == 89 {
 				close <- 1
 			}
 		}
