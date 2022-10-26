@@ -1,14 +1,13 @@
 /*
  * @Date: 2021-09-17 11:14:23
  * @LastEditors: jaxiu
- * @LastEditTime: 2022-01-11 11:46:08
+ * @LastEditTime: 2022-10-26 19:50:09
  * @FilePath: /TestCase/test/map.go
  */
 package test
 
 import (
 	"fmt"
-	"sort"
 	"sync"
 	"time"
 )
@@ -55,5 +54,4 @@ func Map() {
 		b[k] += v
 	}
 	fmt.Println(b)
-sort.Sort()
 }
