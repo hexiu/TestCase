@@ -6,6 +6,7 @@ import (
 )
 
 var chinfo = make(chan int, 10)
+var close chan int
 
 func Channel() {
 	PublicCh()
@@ -17,16 +18,22 @@ func PublicCh() {
 	go func() {
 		for i := 0; i < 100; i++ {
 			chinfo <- i
+			if i == 99 {
+				close <- 1
+			}
 		}
 	}()
 }
 
 func ConsumeCh() {
 	go func() {
-		for i := 0; i < 100; i++ {
+		for {
 			select {
 			case j := <-chinfo:
 				fmt.Println(j)
+			case <-close:
+				fmt.Println("close")
+				return
 			}
 		}
 	}()
