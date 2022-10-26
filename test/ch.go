@@ -33,6 +33,7 @@ func ConsumeCh() {
 				fmt.Println(j)
 			case <-close:
 				fmt.Println("close")
+				time.Sleep(100 * time.Millisecond)
 				break
 			}
 		}
