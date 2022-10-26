@@ -35,6 +35,7 @@ func ConsumeCh() {
 			case k := <-close:
 				fmt.Println("close", k)
 				time.Sleep(100 * time.Millisecond)
+				break
 			}
 		}
 	}()
