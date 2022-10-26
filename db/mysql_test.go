@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-06 20:05:57
  * @LastEditors: jaxiu
- * @LastEditTime: 2021-09-06 21:01:03
+ * @LastEditTime: 2021-09-23 11:42:44
  * @FilePath: /TestCase/db/mysql_test.go
  */
 
@@ -30,4 +30,6 @@ func TestDB(t *testing.T) {
 	sm.ExpectQuery("SELECT (.+) FROM .*").WillReturnRows(sqlmock.NewRows(columns).FromCSVString("1,yunfan01"))
 	SetDB(conn)
 	TestName()
+	
+	initMysqlSqlx()
 }

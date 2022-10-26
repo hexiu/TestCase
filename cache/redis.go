@@ -16,6 +16,7 @@ func Initredis() redis.Conn {
 		log.Println(err)
 		return nil
 	}
+
 	return conn
 }
 
@@ -32,4 +33,14 @@ func ProCache(conn redis.Conn) {
 	} else {
 		fmt.Printf("Got name: %s \n", name)
 	}
+
+	if err = conn.Send("set", "a", "bb"); err != nil {
+		log.Println(err)
+	}
+	if err = conn.Send("expire", "a", 100); err != nil {
+		log.Println(err)
+	}
+
+	conn.Flush()
+	log.Println( conn.Receive())
 }

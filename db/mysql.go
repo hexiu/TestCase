@@ -5,15 +5,16 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/jmoiron/sqlx"
 	"gorm.io/driver/mysql"
 	_ "gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 var db *gorm.DB
+var dsn = "root:root@tcp(127.0.0.1:3306)/ltest?charset=utf8mb4&parseTime=True&loc=Local"
 
 func initMysql() *sql.DB {
-	dsn := "root:root@tcp(127.0.0.1:3306)/ltest?charset=utf8mb4&parseTime=True&loc=Local"
 
 	conn, err := sql.Open("mysql", dsn)
 	if err != nil {
@@ -60,4 +61,36 @@ func TestName() {
 
 func Init() {
 	InitDB(initMysql())
+}
+
+// sqlx
+func initMysqlSqlx() {
+	db, err := sqlx.Connect("mysql", dsn)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	fmt.Println(db.Exec("insert into name (id, name) values (?, ?)", 2, "hjh"))
+
+	rows, err := db.Query("select * from name")
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	for rows.Next() {
+		var x int
+		var y string
+		rows.Scan(&x, &y)
+		fmt.Println(x, y)
+	}
+
+	type Name struct {
+		Id   int
+		Name string
+	}
+	var nameList []Name
+	fmt.Println(db.Select(&nameList, "select * from name"))
+	fmt.Printf("%+v\n", nameList)
+
 }
