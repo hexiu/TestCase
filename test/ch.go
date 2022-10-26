@@ -33,7 +33,7 @@ func ConsumeCh() {
 				fmt.Println(j)
 			case <-close:
 				fmt.Println("close")
-				return
+				break
 			}
 		}
 	}()
